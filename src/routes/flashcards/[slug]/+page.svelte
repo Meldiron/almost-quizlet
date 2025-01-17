@@ -154,24 +154,26 @@
 
 		{#if wasCorrect !== null}
 			<div class="mt-4 grid grid-cols-12 gap-4">
-				<button
-					onclick={() => saveAnswer(true)}
-					type="button"
-					class={`col-span-6 rounded-2xl border-2 border-slate-600 bg-slate-600 px-6 py-3 text-slate-100 ${isHoldingShift ? 'bg-opacity-30' : 'bg-opacity-10'}`}
-				>
-					<p class="mb-3">
-						<span
-							class="rounded-lg border-2 border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300 text-opacity-50"
-							>Shift</span
-						>
-						<span class="px-1 text-slate-500">+</span>
-						<span
-							class="rounded-lg border-2 border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300 text-opacity-50"
-							>Enter</span
-						>
-					</p>
-					<p class="text-lg">I was correct</p>
-				</button>
+				{#if wasCorrect === false}
+					<button
+						onclick={() => saveAnswer(true)}
+						type="button"
+						class={`col-span-6 rounded-2xl border-2 border-slate-600 bg-slate-600 px-6 py-3 text-slate-100 ${isHoldingShift ? 'bg-opacity-30' : 'bg-opacity-10'}`}
+					>
+						<p class="mb-3">
+							<span
+								class="rounded-lg border-2 border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300 text-opacity-50"
+								>Shift</span
+							>
+							<span class="px-1 text-slate-500">+</span>
+							<span
+								class="rounded-lg border-2 border-slate-700 bg-slate-900 px-2 py-1.5 text-xs text-slate-300 text-opacity-50"
+								>Enter</span
+							>
+						</p>
+						<p class="text-lg">I was correct</p>
+					</button>
+				{/if}
 				<button
 					onclick={() => saveAnswer(wasCorrect === null ? true : wasCorrect)}
 					type="button"
