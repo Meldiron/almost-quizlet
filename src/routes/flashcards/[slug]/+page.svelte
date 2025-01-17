@@ -4,6 +4,7 @@
 	import Progress from '$lib/components/Progress.svelte';
 	import type { PageData } from './$types';
 	import { account } from '$lib/appwrite';
+	import { invalidateAll } from '$app/navigation';
 
 	interface Props {
 		data: PageData;
@@ -65,6 +66,8 @@
 					[data.flashcard.slug]: progress
 				})
 			});
+
+			await invalidateAll();
 		} catch (err) {
 			console.error(err);
 			alert('Something went wrong. Please refresh the page.');
@@ -180,7 +183,7 @@
 							>Enter</span
 						>
 					</p>
-					<p class="text-lg">I was wrong</p></button
+					<p class="text-lg">Continue</p></button
 				>
 			</div>
 		{/if}

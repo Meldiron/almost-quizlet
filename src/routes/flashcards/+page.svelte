@@ -23,7 +23,10 @@
 				await account.updatePrefs({
 					flashcards: JSON.stringify({
 						...data.flashcards,
-						[slug]: {}
+						[slug]: {
+							correct: 0,
+							incorrect: 0
+						}
 					})
 				});
 
