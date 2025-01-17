@@ -1,2 +1,9 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+	import { storeTitle } from './store.title.svelte';
+
+	storeTitle.value = 'Home';
+</script>
+
+<p>Welcome 👋</p>
+
+<p>Pick activity from menu.</p>
