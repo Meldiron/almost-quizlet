@@ -74,9 +74,22 @@
 		}
 	}
 
+	function toSimple(text: string) {
+		text = text.toLowerCase();
+		text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+		text = text.normalize();
+		text = text.replace(/[^\w\s]/gi, '');
+
+		return text;
+	}
+
 	function onSubmit(e: Event) {
 		e.preventDefault();
-		wasCorrect = a === correctA;
+		wasCorrect = toSimple(a) === toSimple(correctA);
+
+		if (wasCorrect) {
+			a = correctA;
+		}
 	}
 
 	loadQuestion();
@@ -153,12 +166,12 @@
 		</div>
 
 		{#if wasCorrect !== null}
-			<div class="mt-4 grid grid-cols-12 gap-4">
+			<div class="mt-4 grid grid-cols-12 gap-3">
 				{#if wasCorrect === false}
 					<button
 						onclick={() => saveAnswer(true)}
 						type="button"
-						class={`col-span-6 rounded-2xl border-2 border-slate-600 bg-slate-600 px-6 py-3 text-slate-100 ${isHoldingShift ? 'bg-opacity-30' : 'bg-opacity-10'}`}
+						class={`col-span-12 rounded-2xl border-2 border-slate-600 bg-slate-600 px-6 py-3 text-slate-100 sm:col-span-6 ${isHoldingShift ? 'bg-opacity-30' : 'bg-opacity-10'}`}
 					>
 						<p class="mb-3">
 							<span
@@ -177,7 +190,7 @@
 				<button
 					onclick={() => saveAnswer(wasCorrect === null ? true : wasCorrect)}
 					type="button"
-					class="col-span-6 rounded-2xl border-2 border-slate-600 bg-slate-600 bg-opacity-10 px-6 py-3 text-slate-100"
+					class={`col-span-12 ${wasCorrect ? 'sm:col-span-12' : 'sm:col-span-6'} rounded-2xl border-2 border-slate-600 bg-slate-600 bg-opacity-10 px-6 py-3 text-slate-100`}
 				>
 					<p class="mb-3">
 						<span
